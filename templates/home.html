@@ -6,5 +6,16 @@
 <body>
     <h1>Welcome to Garments E-Commerce</h1>
     <p>Kidswear | Ladieswear | Gentswear</p>
+
+    <h2>Shop by Category</h2>
+<ul>
+    {% for cat in categories %}
+        <li>
+            <a href="{% url 'products:category_products' cat.slug %}">
+                {{ cat.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
 </body>
 </html>

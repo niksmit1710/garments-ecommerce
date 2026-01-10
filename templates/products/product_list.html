@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category.name }}</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<h2>{{ category.name }}</h2>
+
+{% if subcategories %}
+<h4>Subcategories</h4>
+<ul>
+    {% for sub in subcategories %}
+        <li>
+            <a href="{% url 'products:category_products' sub.slug %}">
+                {{ sub.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<hr>
+
+<div class="grid">
+    {% for product in products %}
+        <div class="card">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h4>{{ product.name }}</h4>
+            <p>Brand: {{ product.brand }}</p>
+            <p>₹ {{ product.price }}</p>
+        </div>
+    {% empty %}
+        <p>No products available.</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>
