@@ -8,19 +8,39 @@ class Category(models.Model):
         return self.name
     
 class Size(models.Model):
+    CATEGORY_CHOICES = [
+        ('kids', 'Kidswear'),
+        ('women', "Women's Wear"),
+        ('men', "Men's Wear"),
+    ]
+
     GENDER_CHOICES = [
         ('boy', 'Boy'),
         ('girl', 'Girl'),
         ('unisex', 'Unisex'),
+        ('women', 'Women'),
+        ('men', 'Men'),
     ]
 
-    age_group = models.CharField(max_length=50)
-    size_label = models.CharField(max_length=20)
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    category_type = models.CharField(
+        max_length=10,
+        choices=CATEGORY_CHOICES
+    )
+    label = models.CharField(max_length=20)  # XS, S, M, L, XL, 28, 30
+    age_group = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True
+    )  # only for kids
+    gender = models.CharField(
+        max_length=10,
+        choices=GENDER_CHOICES
+    )
 
     def __str__(self):
-        return f"{self.age_group} - {self.size_label} ({self.gender})"
-
+        if self.category_type == 'kids':
+            return f"{self.label} - {self.age_group}"
+        return f"{self.label} ({self.category_type})"
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
