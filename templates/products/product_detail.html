@@ -74,9 +74,16 @@
                 <p class="text-danger">Out of Stock</p>
             {% endif %}
 
+            <a href="{% url 'cart:add_to_cart' product.id %}"
+   class="btn btn-dark btn-lg w-100">
+   Add to Cart
+</a>
+
+<!--
             <button class="btn btn-dark btn-lg w-100">
                 Add to Cart
             </button>
+        -->
         </div>
 
     </div>
