@@ -1,0 +1,32 @@
+/* Product Grid */
+.product-card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.product-card {
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+}
+
+/* Price */
+.price {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Filter box */
+.filter-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* Buttons */
+.btn-dark {
+    background-color: #000;
+    border: none;
+}
