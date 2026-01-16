@@ -130,5 +130,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/checkout/'
 LOGOUT_REDIRECT_URL = '/'

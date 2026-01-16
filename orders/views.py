@@ -36,7 +36,6 @@ def checkout(request):
         'cart': cart
     })
 
-
 @login_required(login_url='login')
 def checkout(request):
     cart = Cart(request)
@@ -66,3 +65,4 @@ def checkout(request):
         })
 
     return render(request, 'orders/checkout.html', {'cart': cart})
+
