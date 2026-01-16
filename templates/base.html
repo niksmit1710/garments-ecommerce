@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Garments Store{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="/">GarmentsStore</a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Left -->
+      <ul class="navbar-nav me-auto">
+
+        <!-- Categories Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button"
+             data-bs-toggle="dropdown">
+            Categories
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/category/womens-wear/">Women’s Wear</a></li>
+            <li><a class="dropdown-item" href="/category/mens-wear/">Men’s Wear</a></li>
+            <li><a class="dropdown-item" href="/category/kids-wear/">Kids Wear</a></li>
+          </ul>
+        </li>
+
+      </ul>
+
+      <!-- Right -->
+      <ul class="navbar-nav">
+
+        <!-- Cart -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'cart:cart_detail' %}">
+            🛒 Cart
+            {% if request.session.cart %}
+              <span class="badge bg-danger">
+                {{ request.session.cart|length }}
+              </span>
+            {% endif %}
+          </a>
+        </li>
+
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'orders:my_orders' %}">
+              My Orders
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">
+              Logout
+            </a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">
+              Login
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:signup' %}">
+              Signup
+            </a>
+          </li>
+        {% endif %}
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- ========== PAGE CONTENT ========== -->
+<div class="container mt-4">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
