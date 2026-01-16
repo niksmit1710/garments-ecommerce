@@ -5,4 +5,6 @@ app_name = 'orders'
 
 urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
+    path('my-orders/', views.my_orders, name='my_orders'),
+
 ]
