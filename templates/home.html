@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Garments Store</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}{{ Home }}{% endblock %}
+
+{% block content %}
     <h1>Welcome to Garments E-Commerce</h1>
     <p>Kidswear | Ladieswear | Gentswear</p>
 
@@ -17,5 +16,4 @@
         </li>
     {% endfor %}
 </ul>
-</body>
-</html>
+{% endblock %}
