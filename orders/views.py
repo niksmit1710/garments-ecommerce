@@ -55,3 +55,10 @@ def my_orders(request):
     return render(request, 'orders/my_orders.html', {
         'orders': orders
     })
+
+@login_required
+def order_detail(request, order_id):
+    order = Order.objects.get(id=order_id, user=request.user)
+    return render(request, 'orders/order_detail.html', {
+        'order': order
+    })
