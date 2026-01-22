@@ -8,65 +8,73 @@
 
 <div class="row">
 
-  <!-- Order Info -->
-  <div class="col-md-4">
-    <div class="card mb-4">
-      <div class="card-body">
-        <h5 class="card-title">Order Info</h5>
-        <p><strong>Name:</strong> {{ order.full_name }}</p>
-        <p><strong>Address:</strong> {{ order.address }}, {{ order.city }}</p>
-        <p><strong>Phone:</strong> {{ order.phone }}</p>
-        <p><strong>Status:</strong>
-          <span class="badge bg-info text-dark">
-            {{ order.status|title }}
-          </span>
-        </p>
-        <p><strong>Date:</strong>
-          {{ order.created_at|date:"d M Y, h:i A" }}
-        </p>
-      </div>
+    <!-- Order Info -->
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Order Info</h5>
+                <p><strong>Name:</strong> {{ order.full_name }}</p>
+                <p><strong>Address:</strong> {{ order.address }}, {{ order.city }}</p>
+                <p><strong>Phone:</strong> {{ order.phone }}</p>
+                <p><strong>Status:</strong>
+                    <span class="badge bg-info text-dark">
+                        {{ order.status|title }}
+                    </span>
+                </p>
+                <p><strong>Date:</strong>
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Order Items -->
-  <div class="col-md-8">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Ordered Items</h5>
+    <!-- Order Items -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ordered Items</h5>
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Qty</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in order.items.all %}
-            <tr>
-              <td>{{ item.product.name }}</td>
-              <td>₹ {{ item.price }}</td>
-              <td>{{ item.quantity }}</td>
-              <td>₹ {{ item.price|floatformat:2|add:""|floatformat }} × {{ item.quantity }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+                <table class="table table table-bordered align-middle">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items.all %}
+                        <tr>
+                            <td class="d-flex align-items-center">
+                                {% if item.product.image %}
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="60"
+                                    height="60" class="me-3 rounded" style="object-fit: cover;">
+                                {% endif %}
+                                {{ item.product.name }}
+                            </td>
 
-        <h5 class="text-end mt-3">
-          Grand Total: ₹ {{ order.total_amount }}
-        </h5>
+                            <td>₹ {{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>₹ {{ item.price|floatformat:2 }} × {{ item.quantity }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
 
-      </div>
+                </table>
+
+                <h5 class="text-end mt-3">
+                    Grand Total: ₹ {{ order.total_amount }}
+                </h5>
+
+            </div>
+        </div>
     </div>
-  </div>
 
 </div>
 
 <a href="{% url 'orders:my_orders' %}" class="btn btn-secondary mt-4">
-  ← Back to My Orders
+    ← Back to My Orders
 </a>
 
 {% endblock %}
