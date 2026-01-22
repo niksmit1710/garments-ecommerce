@@ -47,11 +47,17 @@
                         {% for item in order.items.all %}
                         <tr>
                             <td class="d-flex align-items-center">
-                                {% if item.product.image %}
-                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="60"
-                                    height="60" class="me-3 rounded" style="object-fit: cover;">
+                                {% if item.product and item.product.image %}
+                                <img src="{{ item.product.image.url }}" width="60" height="60" class="me-3 rounded"
+                                    style="object-fit: cover;">
                                 {% endif %}
-                                {{ item.product.name }}
+                                <div>
+                                    <strong>{{ item.product_name }}</strong><br>
+                                    <small class="text-muted">
+                                        {{ item.product_description|truncatechars:100 }}
+                                    </small><br>
+                                    Size: <strong>{{ item.size }}</strong>
+                                </div>
                             </td>
 
                             <td>₹ {{ item.price }}</td>
@@ -60,6 +66,7 @@
                         </tr>
                         {% endfor %}
                     </tbody>
+
 
                 </table>
 

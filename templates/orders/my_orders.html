@@ -27,14 +27,18 @@
         <td colspan="3">
             <ul>
                 {% for item in order.items.all %}
-                <li class="d-flex align-items-center mb-2">
-                    {% if item.product.image %}
-                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="50" height="50"
-                        class="me-2 rounded" style="object-fit: cover;">
+                <li class="d-flex align-items-start mb-3">
+                    {% if item.product and item.product.image %}
+                    <img src="{{ item.product.image.url }}" width="50" height="50" class="me-3 rounded"
+                        style="object-fit: cover;">
                     {% endif %}
 
                     <div>
-                        <strong>{{ item.product.name }}</strong><br>
+                        <strong>{{ item.product_name }}</strong><br>
+                        <small class="text-muted">
+                            {{ item.product_description|truncatechars:80 }}
+                        </small><br>
+                        Size: <strong>{{ item.size }}</strong><br>
                         Qty: {{ item.quantity }} × ₹ {{ item.price }}
                     </div>
                 </li>

@@ -32,9 +32,13 @@ def checkout(request):
             OrderItem.objects.create(
                 order=order,
                 product=item['product'],
+                product_name=item['product'].name,
+                product_description=item['product'].description,
+                size=item.get('size', 'N/A'),
                 price=item['product'].price,
                 quantity=item['qty']
             )
+
 
         # 3️⃣ Clear Cart
         request.session['cart'] = {}

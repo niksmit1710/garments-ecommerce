@@ -4,6 +4,13 @@ from .models import Order, OrderItem
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
+    readonly_fields = (
+        'product_name',
+        'product_description',
+        'size',
+        'price',
+        'quantity',
+    )
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
